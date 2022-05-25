@@ -1,7 +1,7 @@
 package com.ha.fhir.patient.controller;
 
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.primitive.UriDt;
+import com.ha.fhir.util.ParserResourceUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.hl7.fhir.r4.model.Enumerations;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Api(tags = "The Patient FHIR resource type")
 @RestController
@@ -21,7 +23,7 @@ public class PatientController {
 
     @ApiOperation(value = "Read Patient instance")
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable(value = "id") String id) {
+    public String getPatientById(@PathVariable(value = "id") String id) {
         Patient patient = new Patient();
         patient.addIdentifier();
         patient.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns").toString());
@@ -30,6 +32,7 @@ public class PatientController {
         patient.getName().get(0).addGiven("PatientOne");
         patient.setGender(Enumerations.AdministrativeGender.FEMALE);
         patient.setBirthDate(new Date());
-        return patient;
+        return ParserResourceUtil.encodeResourceToString(patient);
     }
+
 }

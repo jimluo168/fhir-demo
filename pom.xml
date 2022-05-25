@@ -38,19 +38,33 @@
         <!-- At least one "structures" JAR must also be included -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-dstu3</artifactId>
-            <version>${hapifhir.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-r4</artifactId>
             <version>${hapifhir.version}</version>
         </dependency>
+
+        <!-- This dependency includes the JPA server itself, which is packaged separately from the rest of HAPI FHIR -->
+       <!-- <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-jpaserver-base</artifactId>
+            <version>${hapifhir.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jcl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-dstu2</artifactId>
+            <artifactId>hapi-fhir-client-okhttp</artifactId>
             <version>${hapifhir.version}</version>
         </dependency>
+
+
 
         <!-- 用于JSON API文档的生成-->
         <dependency>

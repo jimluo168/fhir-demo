@@ -18,4 +18,8 @@ spring:
 
 swagger:
   enable: true
+  basePackage: com.ha.fhir
 
+hapi:
+  fhir:
+    serverbase: http://hapi-fhir.apjcorp.com/fhir
