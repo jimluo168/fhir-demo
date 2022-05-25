@@ -1,0 +1,21 @@
+server:
+  port: 9090
+  use-forward-headers: true
+  session:
+    cookie:
+      http-only: true
+  contextPath: /fhir
+  servlet:
+    context-path: /fhir
+
+
+spring:
+  application:
+    name: fhir
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+swagger:
+  enable: true
+
