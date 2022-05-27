@@ -18,9 +18,8 @@ public class FhirClient4R4Util {
     }
 
 
-    public static MethodOutcome createResource(IBaseResource theResource) {
+    public static MethodOutcome createResource(String serverBase, IBaseResource theResource) {
         FhirContext ctx = FhirContext.forR4();
-        String serverBase = "http://hapi-fhir.apjcorp.com/fhir";
         IGenericClient client = ctx.newRestfulGenericClient(serverBase);
         return client.create().resource(theResource).prettyPrint().encodedJson().execute();
     }

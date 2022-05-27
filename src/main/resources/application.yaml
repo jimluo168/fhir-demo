@@ -4,9 +4,9 @@ server:
   session:
     cookie:
       http-only: true
-  contextPath: /fhir
+  contextPath: /
   servlet:
-    context-path: /fhir
+    context-path: /
 
 
 spring:
