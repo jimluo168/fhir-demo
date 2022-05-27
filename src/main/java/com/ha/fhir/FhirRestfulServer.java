@@ -7,6 +7,7 @@ import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
 import ca.uhn.fhir.rest.server.provider.ResourceProviderFactory;
 import com.ha.fhir.bundle.controller.BundleResourceProvider;
+import com.ha.fhir.config.HAOpenApiInterceptor;
 import com.ha.fhir.organization.controller.OrganizationResourceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -33,7 +34,7 @@ public class FhirRestfulServer extends RestfulServer {
          */
         registerInterceptor(new ResponseHighlighterInterceptor());
 
-        registerInterceptor(new OpenApiInterceptor());
+        registerInterceptor(new HAOpenApiInterceptor());
 
         // default to JSON and pretty printing.
         setDefaultPrettyPrint(true);
