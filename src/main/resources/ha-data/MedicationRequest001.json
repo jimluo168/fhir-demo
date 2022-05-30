@@ -1,0 +1,69 @@
+{
+  "resourceType": "MedicationRequest",
+  "id": "12345689",
+  "status": "completed",
+  "intent": "order",
+  "medicationCodeableConcept": {
+    "coding": [
+      {
+        "system": "HKMTT",
+        "code": "6057177",
+        "display": "Panadol Extend (paracetamol) oral modified-release tablet"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/123456789012",
+    "display": "123456789012"
+  },
+  "authoredOn": "2020-01-15",
+  "requester": {
+    "reference": "PractitionerRole0001"
+  },
+  "dosageInstruction": [
+    {
+      "sequence": 1,
+      "text": "665 mg - four times daily - oral - for 1 week - 28 tablet",
+      "timing": {
+        "coding": [
+          {
+            "system": "HKMTT",
+            "code": "7703163",
+            "display": "four times daily"
+          }
+        ],
+        "text": "four times daily"
+      },
+      "doseQuantity": {
+        "value": 665,
+        "unit": "mg",
+        "system": "HKMTT",
+        "code": "7703163"
+      },
+      "route": {
+        "coding": [
+          {
+            "system": "HKMTT",
+            "code": "7700046",
+            "display": "Oral"
+          }
+        ],
+        "text": "Oral"
+      }
+    }
+  ],
+  "dispenseRequest": {
+    "quantity": {
+      "value": 28,
+      "unit": "tablet",
+      "system": "HKMTT",
+      "code": "7700245"
+    },
+    "expectedSupplyDuration": {
+      "value": 1,
+      "unit": "week",
+      "system": "HKMTT",
+      "code": "7703286"
+    }
+  }
+}

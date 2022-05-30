@@ -1,0 +1,200 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2021-03-01T00:48:00+08:00"
+  },
+  "type": "document",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id ": "123456789012",
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "text": "HKID"
+                }
+              ]
+            },
+            "value": "OO1234567"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "CHAN",
+            "given": [
+              "TAI MAN"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1974-12-25"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id ": "PractitionerRole0001 ",
+        "practitioner": {
+          "display": "Dr Chuk On Hong"
+        },
+        "organization": {
+          "identifier": "YMT",
+          "display": "Yau Ma Tei Female Social Hygiene Clinic"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "12345689",
+        "status": "completed",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "HKMTT",
+              "code": "6057177",
+              "display": "Panadol Extend (paracetamol) oral modified-release tablet"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/123456789012",
+          "display": "123456789012"
+        },
+        "authoredOn": "2020-01-15",
+        "requester": {
+          "reference": "PractitionerRole0001"
+        },
+        "dosageInstruction": [
+          {
+            "sequence": 1,
+            "text": "665 mg - four times daily - oral - for 1 week - 28 tablet",
+            "timing": {
+              "coding": [
+                {
+                  "system": "HKMTT",
+                  "code": "7703163",
+                  "display": "four times daily"
+                }
+              ],
+              "text": "four times daily"
+            },
+            "doseQuantity": {
+              "value": 665,
+              "unit": "mg",
+              "system": "HKMTT",
+              "code": "7703163"
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "HKMTT",
+                  "code": "7700046",
+                  "display": "Oral"
+                }
+              ],
+              "text": "Oral"
+            }
+          }
+        ],
+        "dispenseRequest": {
+          "quantity": {
+            "value": 28,
+            "unit": "tablet",
+            "system": "HKMTT",
+            "code": "7700245"
+          },
+          "expectedSupplyDuration": {
+            "value": 1,
+            "unit": "week",
+            "system": "HKMTT",
+            "code": "7703286"
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "id": "12345689",
+        "status": "completed",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "HKMTT",
+              "code": "6057177",
+              "display": "Panadol Extend (paracetamol) oral modified-release tablet"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/123456789012",
+          "display": "123456789012"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "Practitioner/123456789012",
+              "display": "Yau Ma Tei Female Social Hygiene Clinic"
+            }
+          }
+        ],
+        "authorizingPrescription": [
+          {
+            "reference": "MedicationRequest/12345689"
+          }
+        ],
+        "whenHandedOver": "2020-01-15",
+        "quantity": {
+          "value": 28,
+          "unit": "tablet",
+          "system": "HKMTT",
+          "code": "7700245"
+        },
+        "daysSupply": {
+          "value": 1,
+          "unit": "week",
+          "system": "HKMTT",
+          "code": "7703286"
+        },
+        "dosageInstruction": [
+          {
+            "sequence": 1,
+            "text": "665 mg - four times daily - oral - for 1 week - 28 tablet",
+            "timing": {
+              "coding": [
+                {
+                  "system": "HKMTT",
+                  "code": "7703163",
+                  "display": "four times daily"
+                }
+              ],
+              "text": "four times daily"
+            },
+            "doseQuantity": {
+              "value": 665,
+              "unit": "mg",
+              "system": "HKMTT",
+              "code": "7703163"
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "HKMTT",
+                  "code": "7700046",
+                  "display": "Oral"
+                }
+              ],
+              "text": "Oral"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

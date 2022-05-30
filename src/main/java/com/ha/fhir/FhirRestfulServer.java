@@ -26,7 +26,7 @@ public class FhirRestfulServer extends RestfulServer {
         super.initialize();
         setFhirContext(FhirContext.forR4());
 
-//        registerProviders(resourceProviderFactory.createProviders());
+        // registerProviders(resourceProviderFactory.createProviders());
         registerProvider(new OrganizationResourceProvider());
         registerProvider(new BundleResourceProvider());
         /*
@@ -35,6 +35,9 @@ public class FhirRestfulServer extends RestfulServer {
         registerInterceptor(new ResponseHighlighterInterceptor());
 
         registerInterceptor(new HAOpenApiInterceptor());
+
+        registerInterceptor(new HAAuthorizationInterceptor());
+
 
         // default to JSON and pretty printing.
         setDefaultPrettyPrint(true);

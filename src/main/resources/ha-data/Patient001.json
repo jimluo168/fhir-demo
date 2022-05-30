@@ -1,0 +1,27 @@
+{
+  "resourceType": "Patient",
+  "id ": "123456789012",
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "text": "HKID"
+          }
+        ]
+      },
+      "value": "OO1234567"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "CHAN",
+      "given": [
+        "TAI MAN"
+      ]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1974-12-25"
+}

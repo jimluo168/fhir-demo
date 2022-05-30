@@ -1,0 +1,11 @@
+{
+  "resourceType": "PractitionerRole",
+  "id ": "PractitionerRole0001 ",
+  "practitioner": {
+    "display": "Dr Chuk On Hong"
+  },
+  "organization": {
+    "identifier": "YMT",
+    "display": "Yau Ma Tei Female Social Hygiene Clinic"
+  }
+}
