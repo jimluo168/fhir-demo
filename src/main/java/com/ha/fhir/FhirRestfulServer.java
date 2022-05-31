@@ -18,8 +18,8 @@ import javax.servlet.ServletException;
 public class FhirRestfulServer extends RestfulServer {
     @Autowired
     private AppProperties appProperties;
-//    @Autowired
-//    private ResourceProviderFactory resourceProviderFactory;
+    @Autowired
+    private ResourceProviderFactory resourceProviderFactory;
 
     @Override
     protected void initialize() throws ServletException {
@@ -27,8 +27,9 @@ public class FhirRestfulServer extends RestfulServer {
         setFhirContext(FhirContext.forR4());
 
         // registerProviders(resourceProviderFactory.createProviders());
-        registerProvider(new OrganizationResourceProvider());
-        registerProvider(new BundleResourceProvider());
+//        registerProvider(new OrganizationResourceProvider());
+//        registerProvider(new BundleResourceProvider());
+        registerProviders(resourceProviderFactory.createProviders());
         /*
          * Use nice coloured HTML when a browser is used to request the content
          */

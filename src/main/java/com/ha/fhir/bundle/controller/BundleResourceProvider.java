@@ -5,18 +5,18 @@ import ca.uhn.fhir.model.api.Include;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.annotation.*;
-import ca.uhn.fhir.rest.annotation.Count;
 import ca.uhn.fhir.rest.api.*;
-import ca.uhn.fhir.rest.api.Constants;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.param.*;
 import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.util.BundleBuilder;
+import com.ha.fhir.BaseProvider;
+import com.ha.fhir.bundle.service.BundleResourceService;
 import org.hl7.fhir.instance.model.api.IBase;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.*;
-import org.junit.jupiter.api.Assertions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -24,7 +24,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class BundleResourceProvider implements IResourceProvider {
+public class BundleResourceProvider extends BaseProvider implements IResourceProvider {
+
+    @Autowired
+    private BundleResourceService bundleResourceService;
+
     @Override
     public Class<Bundle> getResourceType() {
         return Bundle.class;
@@ -32,6 +36,8 @@ public class BundleResourceProvider implements IResourceProvider {
 
     @Read()
     public Bundle read(HttpServletRequest theRequest, @IdParam IIdType theId, RequestDetails theRequestDetails) {
+
+        bundleResourceService.read(theId, theRequestDetails);
 
         FhirContext myFhirContext = FhirContext.forR4();
 
@@ -43,7 +49,7 @@ public class BundleResourceProvider implements IResourceProvider {
 
 
     @Search(allowUnknownParams = true)
-    public Bundle search(
+    public IBaseResource search(
             javax.servlet.http.HttpServletRequest theServletRequest,
             javax.servlet.http.HttpServletResponse theServletResponse,
 
@@ -171,7 +177,7 @@ public class BundleResourceProvider implements IResourceProvider {
         MedicationDispense medicationDispense = parser.parseResource(MedicationDispense.class,
                 getClass().getClassLoader().getResourceAsStream("ha-data/MedicationDispense001.json"));
         builder.addToEntry(entry, "resource", medicationDispense);
-        return (Bundle) builder.getBundle();
+        return builder.getBundle();
     }
 
     @Create
