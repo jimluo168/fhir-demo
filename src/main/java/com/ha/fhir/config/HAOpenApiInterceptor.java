@@ -9,6 +9,12 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 import java.util.Collections;
 
+/**
+ * @className: HAOpenApiInterceptor
+ * @description: 自定义OpenApi, 添加oauth2
+ * @author: Jim Luo
+ * @date: 2022/5/31
+ **/
 public class HAOpenApiInterceptor extends OpenApiInterceptor {
 
     @Override

@@ -1,13 +1,11 @@
 package com.ha.fhir.config;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.provider.ResourceProviderFactory;
-import com.ha.fhir.bundle.controller.BundleResourceProvider;
+import com.ha.fhir.api.bundle.provider.IBundleResourceProvider;
+import com.ha.fhir.impl.bundle.provider.BundleResourceProviderImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-
-import java.util.function.Supplier;
 
 @Configuration
 public class BaseJavaConfigR4 extends BaseR4Config {
@@ -21,8 +19,8 @@ public class BaseJavaConfigR4 extends BaseR4Config {
 
     @Bean(name = "myBundleRpR4")
     @Lazy
-    public BundleResourceProvider rpBundleR4() {
-        BundleResourceProvider provider = new BundleResourceProvider();
+    public BundleResourceProviderImpl rpBundleR4() {
+        BundleResourceProviderImpl provider = new BundleResourceProviderImpl();
         provider.setContext(fhirContextR4());
         return provider;
     }
