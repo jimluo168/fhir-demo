@@ -13,7 +13,7 @@ import org.hl7.fhir.r4.model.Patient;
 import java.util.*;
 
 public class RestfulPatientResourceProvider extends BaseProvider implements IResourceProvider {
-    private Map<String, Patient> myPatients = new HashMap<String,Patient>();
+    private Map<String, Patient> myPatients = new HashMap();
 
     @Override
     public Class<? extends IBaseResource> getResourceType() {
@@ -29,6 +29,7 @@ public class RestfulPatientResourceProvider extends BaseProvider implements IRes
         patient.addName().setFamily("Test");
         patient.getName().get(0).addGiven("PatientOne");
         patient.setGender(Enumerations.AdministrativeGender.FEMALE);
+        patient.addGeneralPractitioner().setReference("ssss");
         myPatients.put(patient.getId(),patient);
     }
 
@@ -43,18 +44,18 @@ public class RestfulPatientResourceProvider extends BaseProvider implements IRes
 
     @Search()
     public List<Patient> search() {
-        List<Patient> list = new ArrayList<Patient>();
+        List<Patient> list = new ArrayList();
         list.addAll(myPatients.values());
         return list;
     }
 
     @Search
     public List<Patient> search(@RequiredParam(name = Patient.SP_FAMILY) StringParam theParam) {
-        List<Patient> list = new ArrayList<Patient>();
+        List<Patient> list = new ArrayList();
         // Loop through the patients looking for matches
         for (Patient patient : myPatients.values()) {
             String familyName = patient.getNameFirstRep().getFamily().toLowerCase();
-            if (familyName.contains(theParam.getValue().toLowerCase()) == false) {
+            if(familyName.contains(theParam.getValue().toLowerCase()) == false) {
                 continue;
             }
             list.add(patient);

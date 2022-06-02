@@ -1,11 +1,23 @@
 {
   "resourceType": "PractitionerRole",
-  "id ": "PractitionerRole0001 ",
+  "id": "PractitionerRole0001",
   "practitioner": {
     "display": "Dr Chuk On Hong"
   },
   "organization": {
-    "identifier": "YMT",
+    "identifier":[
+        {
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        }
+      }
+    ],
     "display": "Yau Ma Tei Female Social Hygiene Clinic"
   }
 }
