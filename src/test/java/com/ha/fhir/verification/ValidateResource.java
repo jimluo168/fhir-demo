@@ -2,6 +2,7 @@ package com.ha.fhir.verification;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
+import ca.uhn.fhir.parser.LenientErrorHandler;
 import ca.uhn.fhir.parser.StrictErrorHandler;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.validation.FhirValidator;
@@ -23,7 +24,10 @@ public class ValidateResource {
 
         // Create a parser and configure it to use the strict error handler
         IParser parser = ctx.newXmlParser();
+        //如果检测到任何错误，StrictErrorHandler将引发DataFormatException 。
         parser.setParserErrorHandler(new StrictErrorHandler());
+        //记录任何错误但不会中止解析
+        //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
         String input = "<Patient><active value=\"true\"/><active value=\"false\"/></Patient>";
@@ -39,6 +43,8 @@ public class ValidateResource {
         // Create a parser and configure it to use the strict error handler
         IParser parser = ctx.newJsonParser();
         parser.setParserErrorHandler(new StrictErrorHandler());
+        //记录任何错误但不会中止解析
+        //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
         String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Patient001.json");
@@ -54,6 +60,8 @@ public class ValidateResource {
         // Create a parser and configure it to use the strict error handler
         IParser parser = ctx.newJsonParser();
         parser.setParserErrorHandler(new StrictErrorHandler());
+        //记录任何错误但不会中止解析
+        //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
         String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Bundler1.json");
@@ -69,6 +77,9 @@ public class ValidateResource {
         // Create a parser and configure it to use the strict error handler
         IParser parser = ctx.newJsonParser();
         parser.setParserErrorHandler(new StrictErrorHandler());
+
+        //记录任何错误但不会中止解析
+        //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
         String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\PractitionerRole0001.json");
