@@ -2,7 +2,6 @@ package com.ha.fhir.verification;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
-import ca.uhn.fhir.parser.LenientErrorHandler;
 import ca.uhn.fhir.parser.StrictErrorHandler;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.validation.FhirValidator;
@@ -10,13 +9,12 @@ import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
-import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.hl7.fhir.r4.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
-public class ValidateResource {
+public class ValidateResourceTest {
 
     @Test
     public void ValidateResourceXmlString(){
@@ -37,7 +35,7 @@ public class ValidateResource {
     }
 
     @Test
-        public void ValidateResourceJsonString(){
+    public void ValidateResourceJsonString(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
