@@ -13,7 +13,7 @@ import org.hl7.fhir.r4.model.Patient;
 import java.util.*;
 
 public class RestfulPatientResourceProvider extends BaseProvider implements IResourceProvider {
-    private Map<String, Patient> myPatients = new HashMap();
+    private Map<String, Patient> myPatients = new HashMap<String,Patient>();
 
     @Override
     public Class<? extends IBaseResource> getResourceType() {
@@ -44,18 +44,18 @@ public class RestfulPatientResourceProvider extends BaseProvider implements IRes
 
     @Search()
     public List<Patient> search() {
-        List<Patient> list = new ArrayList();
+        List<Patient> list = new ArrayList<Patient>();
         list.addAll(myPatients.values());
         return list;
     }
 
     @Search
     public List<Patient> search(@RequiredParam(name = Patient.SP_FAMILY) StringParam theParam) {
-        List<Patient> list = new ArrayList();
+        List<Patient> list = new ArrayList<Patient>();
         // Loop through the patients looking for matches
         for (Patient patient : myPatients.values()) {
             String familyName = patient.getNameFirstRep().getFamily().toLowerCase();
-            if(familyName.contains(theParam.getValue().toLowerCase()) == false) {
+            if (familyName.contains(theParam.getValue().toLowerCase()) == false) {
                 continue;
             }
             list.add(patient);
