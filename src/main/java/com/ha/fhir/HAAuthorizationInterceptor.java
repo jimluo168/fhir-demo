@@ -28,14 +28,14 @@ public class HAAuthorizationInterceptor extends AuthorizationInterceptor {
         String authHeader = theRequestDetails.getHeader("Authorization");
         if ("Bearer token_user1".equals(authHeader)) {
             // This user has access only to Patient/1 resources
-            userIdPatientId = new IdType("Patient", 1L);
+            userIdPatientId = new IdType("Bundle", 1L);
         } else if ("Bearer token_admin1".equals(authHeader)) {
             // This user has access to everything
             userIsAdmin = true;
         } else {
             if (authHeader == null &&
                     (StringUtils.equals(theRequestDetails.getRequestPath(), "swagger-ui/")
-                    || StringUtils.equals(theRequestDetails.getRequestPath(), "api-docs"))) {
+                            || StringUtils.equals(theRequestDetails.getRequestPath(), "api-docs"))) {
                 return new RuleBuilder().allowAll().build();
             }
             // Throw an HTTP 401
@@ -51,19 +51,8 @@ public class HAAuthorizationInterceptor extends AuthorizationInterceptor {
                     .allow()
                     .read()
                     .allResources()
-                    .inCompartment("Patient", userIdPatientId)
-
-                    .andThen()
-                    .allow()
-                    .write()
-                    .allResources()
-                    .inCompartment("Patient", userIdPatientId)
-
-                    .andThen()
-                    .allow()
-                    .read()
-                    .allResources()
                     .inCompartment("Bundle", userIdPatientId)
+
 
                     .andThen()
                     .deny()

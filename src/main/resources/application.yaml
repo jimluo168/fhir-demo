@@ -23,3 +23,8 @@ swagger:
 hapi:
   fhir:
     serverbase: http://hapi-fhir.apjcorp.com/fhir
+
+repository:
+  httpclient:
+    basePackage: com.ha.fhir.**.repository
+    server1: http://hapi-fhir.apjcorp.com/fhir

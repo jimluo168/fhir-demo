@@ -2,13 +2,10 @@ package com.ha.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.EncodingEnum;
-import ca.uhn.fhir.rest.openapi.OpenApiInterceptor;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
 import ca.uhn.fhir.rest.server.provider.ResourceProviderFactory;
-import com.ha.fhir.bundle.controller.BundleResourceProvider;
 import com.ha.fhir.config.HAOpenApiInterceptor;
-import com.ha.fhir.organization.controller.OrganizationResourceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 
@@ -26,13 +23,16 @@ public class FhirRestfulServer extends RestfulServer {
         super.initialize();
         setFhirContext(FhirContext.forR4());
 
-        // registerProviders(resourceProviderFactory.createProviders());
-//        registerProvider(new OrganizationResourceProvider());
+        /**
+         * 此处注册ResourceProvider
+         */
 //        registerProvider(new BundleResourceProvider());
         registerProviders(resourceProviderFactory.createProviders());
-        /*
-         * Use nice coloured HTML when a browser is used to request the content
+
+        /**
+         * 注册拦截器的地方.
          */
+        // Use nice coloured HTML when a browser is used to request the content
         registerInterceptor(new ResponseHighlighterInterceptor());
 
         registerInterceptor(new HAOpenApiInterceptor());
@@ -42,7 +42,6 @@ public class FhirRestfulServer extends RestfulServer {
 
         // default to JSON and pretty printing.
         setDefaultPrettyPrint(true);
-
         setDefaultResponseEncoding(EncodingEnum.JSON);
     }
 }

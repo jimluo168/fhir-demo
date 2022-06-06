@@ -81,6 +81,11 @@
             <artifactId>hapi-fhir-server</artifactId>
             <version>${hapifhir.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-jpaserver-searchparam</artifactId>
+            <version>${hapifhir.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -96,11 +101,11 @@
 
 
         <!-- 用于JSON API文档的生成-->
-       <!-- <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>io.springfox</groupId>
+             <artifactId>springfox-boot-starter</artifactId>
+             <version>${springfox.version}</version>
+         </dependency>-->
     </dependencies>
 
     <build>

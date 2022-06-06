@@ -1,17 +1,19 @@
-package com.ha.fhir.bundle.controller;
+package com.ha.fhir.impl.bundle.provider;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.Include;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.annotation.*;
+import ca.uhn.fhir.rest.annotation.Count;
 import ca.uhn.fhir.rest.api.*;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.param.*;
 import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.util.BundleBuilder;
-import com.ha.fhir.BaseProvider;
-import com.ha.fhir.bundle.service.BundleResourceService;
+import com.ha.fhir.BaseResourceProvider;
+import com.ha.fhir.api.bundle.provider.IBundleResourceProvider;
+import com.ha.fhir.api.bundle.service.IBundleResourceService;
 import org.hl7.fhir.instance.model.api.IBase;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.instance.model.api.IIdType;
@@ -19,35 +21,30 @@ import org.hl7.fhir.r4.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class BundleResourceProvider extends BaseProvider implements IResourceProvider {
-
+public class BundleResourceProviderImpl extends BaseResourceProvider implements IBundleResourceProvider,
+        IResourceProvider {
     @Autowired
-    private BundleResourceService bundleResourceService;
+    private IBundleResourceService bundleResourceService;
 
     @Override
-    public Class<Bundle> getResourceType() {
+    public Class<? extends IBaseResource> getResourceType() {
         return Bundle.class;
     }
 
-    @Read()
+
+    @Override
+    @Read
     public Bundle read(HttpServletRequest theRequest, @IdParam IIdType theId, RequestDetails theRequestDetails) {
-
-        bundleResourceService.read(theId, theRequestDetails);
-
-        FhirContext myFhirContext = FhirContext.forR4();
-
-        IParser parser = myFhirContext.newJsonParser();
-
-        Bundle bundle = parser.parseResource(Bundle.class, BundleResourceProvider.class.getClassLoader().getResourceAsStream("ha-data/Bundler1.json"));
-        return bundle;
+        return bundleResourceService.read(theId, theRequestDetails);
     }
 
-
+    @Override
     @Search(allowUnknownParams = true)
     public IBaseResource search(
             javax.servlet.http.HttpServletRequest theServletRequest,
@@ -180,9 +177,8 @@ public class BundleResourceProvider extends BaseProvider implements IResourcePro
         return builder.getBundle();
     }
 
-    @Create
+    @Override
     public MethodOutcome create(HttpServletRequest theRequest, @ResourceParam Bundle theResource, @ConditionalUrlParam String theConditional, RequestDetails theRequestDetails) {
-        // write deny
         return null;
     }
 }
