@@ -13,7 +13,9 @@ public class BaseJavaConfigR4 extends BaseR4Config {
     public ResourceProviderFactory resourceProvidersR4() {
         ResourceProviderFactory factory = new ResourceProviderFactory();
         factory.addSupplier(() -> rpBundleR4());
-        factory.addSupplier(() -> myPatientRpR4());
+
+        factory.addSupplier(() -> rpPatientRpR4());
+
         return factory;
     }
 
@@ -27,9 +29,10 @@ public class BaseJavaConfigR4 extends BaseR4Config {
 
     @Bean(name = "myPatientRpR4")
     @Lazy
-    public PatientResourceProviderImpl myPatientRpR4() {
+    public PatientResourceProviderImpl rpPatientRpR4() {
         PatientResourceProviderImpl provider = new PatientResourceProviderImpl();
         provider.setContext(fhirContextR4());
         return provider;
     }
+
 }

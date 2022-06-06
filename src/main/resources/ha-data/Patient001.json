@@ -1,14 +1,17 @@
 {
   "resourceType": "Patient",
-  "id ": "123456789012",
+  "id": "123456",
   "identifier": [
     {
       "type": {
         "coding": [
           {
-            "text": "HKID"
+            "system": "http://snomed.info/sct",
+            "code": "260385009",
+            "display": "Negative"
           }
-        ]
+        ],
+        "text": "HKID"
       },
       "value": "OO1234567"
     }

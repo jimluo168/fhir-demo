@@ -9,15 +9,18 @@
     {
       "resource": {
         "resourceType": "Patient",
-        "id ": "123456789012",
+        "id": "123456789012",
         "identifier": [
           {
             "type": {
               "coding": [
                 {
-                  "text": "HKID"
+                  "system": "http://snomed.info/sct",
+                  "code": "260385009",
+                  "display": "Negative"
                 }
-              ]
+              ],
+              "text": "HKID"
             },
             "value": "OO1234567"
           }
@@ -38,12 +41,24 @@
     {
       "resource": {
         "resourceType": "PractitionerRole",
-        "id ": "PractitionerRole0001 ",
+        "id": "PractitionerRole0001 ",
         "practitioner": {
           "display": "Dr Chuk On Hong"
         },
         "organization": {
-          "identifier": "YMT",
+          "identifier":[
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "260385009",
+                    "display": "Negative"
+                  }
+                ]
+              }
+            }
+          ],
           "display": "Yau Ma Tei Female Social Hygiene Clinic"
         }
       }
@@ -76,20 +91,21 @@
             "sequence": 1,
             "text": "665 mg - four times daily - oral - for 1 week - 28 tablet",
             "timing": {
-              "coding": [
-                {
-                  "system": "HKMTT",
-                  "code": "7703163",
-                  "display": "four times daily"
-                }
-              ],
-              "text": "four times daily"
-            },
-            "doseQuantity": {
-              "value": 665,
-              "unit": "mg",
-              "system": "HKMTT",
-              "code": "7703163"
+              "event": "2020-01-15",
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "260385009",
+                    "display": "Negative"
+                  }, {
+                    "system": "https://acme.lab/resultcodes",
+                    "code": "NEG",
+                    "display": "Negative"
+                  }
+                ],
+                "text": "Negative for Chlamydia Trachomatis rRNA"
+              }
             },
             "route": {
               "coding": [
@@ -168,20 +184,16 @@
             "sequence": 1,
             "text": "665 mg - four times daily - oral - for 1 week - 28 tablet",
             "timing": {
-              "coding": [
-                {
-                  "system": "HKMTT",
-                  "code": "7703163",
-                  "display": "four times daily"
-                }
-              ],
-              "text": "four times daily"
-            },
-            "doseQuantity": {
-              "value": 665,
-              "unit": "mg",
-              "system": "HKMTT",
-              "code": "7703163"
+              "code": {
+                "coding": [
+                  {
+                    "system": "HKMTT",
+                    "code": "7703163",
+                    "display": "four times daily"
+                  }
+                ],
+                "text": "four times daily"
+              }
             },
             "route": {
               "coding": [
