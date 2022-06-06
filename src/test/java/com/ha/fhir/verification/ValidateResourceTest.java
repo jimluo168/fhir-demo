@@ -8,9 +8,14 @@ import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.*;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.ResourceUtils;
 
 import java.io.*;
 
@@ -45,10 +50,10 @@ public class ValidateResourceTest {
         //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Patient001.json");
+        //String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Patient001.json");
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(Patient.class, input);
+        parser.parseResource(Patient.class, getClass().getClassLoader().getResourceAsStream("ha-data/Patient001.json"));
     }
 
     @Test
@@ -62,10 +67,10 @@ public class ValidateResourceTest {
         //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Bundler1.json");
+        //String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\Bundler1.json");
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(Bundle.class, input);
+        parser.parseResource(Bundle.class, getClass().getClassLoader().getResourceAsStream("ha-data/Bundler1.json"));
     }
 
     @Test
@@ -80,10 +85,10 @@ public class ValidateResourceTest {
         //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\PractitionerRole0001.json");
+        //String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\PractitionerRole0001.json");
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(PractitionerRole.class, input);
+        parser.parseResource(PractitionerRole.class,  getClass().getClassLoader().getResourceAsStream("ha-data/PractitionerRole0001.json"));
     }
 
     @Test
@@ -95,10 +100,10 @@ public class ValidateResourceTest {
         parser.setParserErrorHandler(new StrictErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\MedicationRequest001.json");
+        //String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\MedicationRequest001.json");
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(MedicationRequest.class, input);
+        parser.parseResource(MedicationRequest.class, getClass().getClassLoader().getResourceAsStream("ha-data/MedicationRequest001.json"));
     }
 
     @Test
@@ -110,10 +115,10 @@ public class ValidateResourceTest {
         parser.setParserErrorHandler(new StrictErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = readJsonFile("D:\\src\\fhir-demo\\src\\main\\resources\\ha-data\\MedicationDispense001.json");
+        //String input = readJsonFile("ha-data/MedicationDispense001.json");
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(MedicationDispense.class, input);
+        parser.parseResource(MedicationDispense.class, getClass().getClassLoader().getResourceAsStream("ha-data/MedicationDispense001.json"));
     }
 
     @Test
@@ -142,6 +147,7 @@ public class ValidateResourceTest {
         Patient resource = new Patient();
         resource.addName().setFamily("Simpson").addGiven("Homer");
         ValidationResult result = validator.validateWithResult(resource);
+        System.out.println(result.isSuccessful());
 
         // The input can also be a raw string (this mechanism can
         // potentially catch syntax issues that would have been missed
@@ -154,29 +160,6 @@ public class ValidateResourceTest {
         for (SingleValidationMessage next : result.getMessages()) {
             System.out.println("-------------");
             System.out.println(next.getLocationString() + " " + next.getMessage());
-        }
-    }
-
-
-
-    public String readJsonFile(String Filename) {
-        String jsonStr = "";
-        try {
-            File jsonFile = new File(Filename);
-            FileReader fileReader = new FileReader(jsonFile);
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "utf-8");
-            int ch = 0;
-            StringBuffer sb = new StringBuffer();
-            while ((ch = reader.read()) != -1) {
-                sb.append((char) ch);
-            }
-            fileReader.close();
-            reader.close();
-            jsonStr = sb.toString();
-            return jsonStr;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 }
