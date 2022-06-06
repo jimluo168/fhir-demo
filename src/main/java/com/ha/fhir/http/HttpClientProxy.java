@@ -53,7 +53,7 @@ public class HttpClientProxy<T> implements InvocationHandler {
         if (Object.class.equals(method.getDeclaringClass())) {
             return method.invoke(this, args);
         }
-        logger.info("invoke proxy:{} method:{} args:{}", proxy, method, args);
+        logger.info("HttpClient proxy:{} method:{} args:{}", interfaceType.getName(), method, args);
         Annotation[] clsAnnos = method.getDeclaringClass().getAnnotations();
         if (!Arrays.stream(clsAnnos).filter(annotation -> annotation.annotationType().equals(HttpClient.class)).findAny().isPresent()) {
             throw new RuntimeException("class must be add @HttpClient");
@@ -78,7 +78,7 @@ public class HttpClientProxy<T> implements InvocationHandler {
             String envKey = urlMatcher.group(2);
             String value = ApplicationContextUtil.getApplicationContext().getEnvironment().getProperty(envKey);
             if (value == null) {
-                throw new RuntimeException(interfaceType.getClass() + " @HttpClient url " + envKey + " not " +
+                throw new RuntimeException(interfaceType.getName() + " @HttpClient url " + envKey + " not " +
                         "configured in application.yaml");
             }
             url = url.replaceAll("\\$\\{" + envKey + "}", value);
