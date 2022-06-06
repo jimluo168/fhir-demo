@@ -125,7 +125,9 @@ public class HttpClientProxy<T> implements InvocationHandler {
                 //TODO 此处暂时FHIR标准格式数据处理，后续有其他格式再完善.
                 Class<IBaseResource> returnType = (Class<IBaseResource>) method.getReturnType();
 
+                logger.debug("httpclient request url:{}",url);
                 String resposeBody = client.execute(request, fhirStandardFormat(url));
+                logger.debug("httpclient request resposeBody:{}",resposeBody);
                 switch (responseBodyAnno.format()) {
                     case FHIR_JSON:
                         FhirContext myFhirContext = FhirContext.forR4();
