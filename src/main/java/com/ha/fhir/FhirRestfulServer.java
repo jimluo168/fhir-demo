@@ -23,13 +23,16 @@ public class FhirRestfulServer extends RestfulServer {
         super.initialize();
         setFhirContext(FhirContext.forR4());
 
-        // registerProviders(resourceProviderFactory.createProviders());
-//        registerProvider(new OrganizationResourceProvider());
+        /**
+         * 此处注册ResourceProvider
+         */
 //        registerProvider(new BundleResourceProvider());
         registerProviders(resourceProviderFactory.createProviders());
-        /*
-         * Use nice coloured HTML when a browser is used to request the content
+
+        /**
+         * 注册拦截器的地方.
          */
+        // Use nice coloured HTML when a browser is used to request the content
         registerInterceptor(new ResponseHighlighterInterceptor());
 
         registerInterceptor(new HAOpenApiInterceptor());
@@ -39,7 +42,6 @@ public class FhirRestfulServer extends RestfulServer {
 
         // default to JSON and pretty printing.
         setDefaultPrettyPrint(true);
-
         setDefaultResponseEncoding(EncodingEnum.JSON);
     }
 }

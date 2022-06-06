@@ -1,8 +1,8 @@
 package com.ha.fhir.config;
 
 import ca.uhn.fhir.rest.server.provider.ResourceProviderFactory;
-import com.ha.fhir.api.bundle.provider.IBundleResourceProvider;
 import com.ha.fhir.impl.bundle.provider.BundleResourceProviderImpl;
+import com.ha.fhir.impl.patient.provider.PatientResourceProviderImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -13,7 +13,7 @@ public class BaseJavaConfigR4 extends BaseR4Config {
     public ResourceProviderFactory resourceProvidersR4() {
         ResourceProviderFactory factory = new ResourceProviderFactory();
         factory.addSupplier(() -> rpBundleR4());
-
+        factory.addSupplier(() -> myPatientRpR4());
         return factory;
     }
 
@@ -21,6 +21,14 @@ public class BaseJavaConfigR4 extends BaseR4Config {
     @Lazy
     public BundleResourceProviderImpl rpBundleR4() {
         BundleResourceProviderImpl provider = new BundleResourceProviderImpl();
+        provider.setContext(fhirContextR4());
+        return provider;
+    }
+
+    @Bean(name = "myPatientRpR4")
+    @Lazy
+    public PatientResourceProviderImpl myPatientRpR4() {
+        PatientResourceProviderImpl provider = new PatientResourceProviderImpl();
         provider.setContext(fhirContextR4());
         return provider;
     }
