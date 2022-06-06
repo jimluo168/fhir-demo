@@ -8,16 +8,9 @@ import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.ResourceUtils;
-
-import java.io.*;
 
 public class ValidateResourceTest {
 
