@@ -31,118 +31,27 @@ import java.util.Set;
 public interface IPatientResourceProvider {
     Patient read(HttpServletRequest theRequest, IIdType theId, RequestDetails theRequestDetails);
 
-    Bundle search(
-            javax.servlet.http.HttpServletRequest theServletRequest,
-            javax.servlet.http.HttpServletResponse theServletResponse,
+    Bundle search(javax.servlet.http.HttpServletRequest theServletRequest, javax.servlet.http.HttpServletResponse theServletResponse,
 
-            ca.uhn.fhir.rest.api.server.RequestDetails theRequestDetails,
+                  ca.uhn.fhir.rest.api.server.RequestDetails theRequestDetails,
 
-            StringAndListParam theFtFilter,
+                  StringAndListParam theName,
 
-            StringAndListParam theFtContent,
+                  TokenAndListParam theGender,
 
-            StringAndListParam theFtText,
+                  TokenAndListParam theIdentifier,
 
-            TokenAndListParam theSearchForTag,
+                  DateRangeParam theBirthdate,
 
-            TokenAndListParam theSearchForSecurity,
+                  SortSpec theSort,
 
-            UriAndListParam theSearchForProfile,
+                  Integer theCount,
 
-            UriAndListParam theSearchForSource,
+                  Integer theOffset,
 
-            HasAndListParam theHas,
+                  SummaryEnum theSummaryMode,
 
+                  SearchTotalModeEnum theSearchTotalMode,
 
-            TokenAndListParam the_id,
-
-
-            TokenAndListParam theActive,
-
-
-            StringAndListParam theAddress,
-
-
-            StringAndListParam theAddress_city,
-
-
-            StringAndListParam theAddress_country,
-
-
-            StringAndListParam theAddress_postalcode,
-
-
-            StringAndListParam theAddress_state,
-
-
-            TokenAndListParam theAddress_use,
-
-
-            DateRangeParam theBirthdate,
-
-
-            DateRangeParam theDeath_date,
-
-
-            TokenAndListParam theDeceased,
-
-
-            TokenAndListParam theEmail,
-
-
-            StringAndListParam theFamily,
-
-
-            TokenAndListParam theGender,
-
-
-            ReferenceAndListParam theGeneral_practitioner,
-
-
-            StringAndListParam theGiven,
-
-
-            TokenAndListParam theIdentifier,
-
-
-            TokenAndListParam theLanguage,
-
-
-            ReferenceAndListParam theLink,
-
-
-            StringAndListParam theName,
-
-
-            ReferenceAndListParam theOrganization,
-
-
-            TokenAndListParam thePhone,
-
-
-            StringAndListParam thePhonetic,
-
-
-            TokenAndListParam theTelecom,
-
-            Map<String, List<String>> theAdditionalRawParams,
-
-            DateRangeParam theLastUpdated,
-
-            Set<Include> theIncludes,
-
-            Set<Include> theRevIncludes,
-
-            SortSpec theSort,
-
-            Integer theCount,
-
-            Integer theOffset,
-
-            SummaryEnum theSummaryMode,
-
-            SearchTotalModeEnum theSearchTotalMode,
-
-            SearchContainedModeEnum theSearchContainedMode
-    );
+                  SearchContainedModeEnum theSearchContainedMode);
 }

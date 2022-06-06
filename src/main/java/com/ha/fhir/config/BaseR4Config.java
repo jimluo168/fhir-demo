@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 
 //@Configuration
 public class BaseR4Config {
-    public static FhirContext ourFhirContext = FhirContext.forR4();
+    public final static FhirContext ourFhirContext = FhirContext.forR4();
 
     @Bean
     @Primary

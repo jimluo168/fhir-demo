@@ -81,6 +81,11 @@
             <artifactId>hapi-fhir-server</artifactId>
             <version>${hapifhir.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-jpaserver-searchparam</artifactId>
+            <version>${hapifhir.version}</version>
+        </dependency>
 
 
         <!-- 用于JSON API文档的生成-->

@@ -1,5 +1,8 @@
 package com.ha.fhir.api.patient.repository;
 
+import ca.uhn.fhir.rest.param.DateRangeParam;
+import ca.uhn.fhir.rest.param.StringAndListParam;
+import ca.uhn.fhir.rest.param.TokenAndListParam;
 import com.ha.fhir.http.annotation.*;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Patient;
@@ -19,9 +22,10 @@ public interface IPatientResourceRepository {
 
     @Get(path = "")
     @ResponseBody(format = ResponseBody.DataFormat.FHIR_JSON)
-    Bundle search(@Param(name = "identifier") String identifier,
-                  @Param(name = "gender") String gender,
-                  @Param(name = "birthdate") String birthdate);
+    Bundle search(@Param(name = "identifier") StringAndListParam identifier,
+                  @Param(name = "gender") TokenAndListParam gender,
+                  @Param(name = "identifier") TokenAndListParam theIdentifier,
+                  @Param(name = "birthdate") DateRangeParam birthdate);
 
 
 }
