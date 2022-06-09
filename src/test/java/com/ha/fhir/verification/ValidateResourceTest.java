@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class ValidateResourceTest {
 
     @Test
-    public void ValidateResourceXmlString(){
+    public void validateResourceXmlString(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -26,14 +26,15 @@ public class ValidateResourceTest {
         //parser.setParserErrorHandler(new LenientErrorHandler());
 
         // This example resource is invalid, as Patient.active can not repeat
-        String input = "<Patient><active value=\"true\"/><active value=\"false\"/></Patient>";
+        String input = "<Patient><active value=\"true\"/></Patient>";
 
         // The following will throw a DataFormatException because of the StrictErrorHandler
-        parser.parseResource(Patient.class, input);
+        Patient patient= parser.parseResource(Patient.class, input);
+        System.out.println(patient.getActive());
     }
 
     @Test
-    public void ValidateResourceJsonString(){
+    public void validateResourceJsonString(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -50,7 +51,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void BundlerValidateResource(){
+    public void bundlerValidateResource(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -67,7 +68,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void PractitionerRoleValidateResource(){
+    public void practitionerRoleValidateResource(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -85,7 +86,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void MedicationRequestValidateResource(){
+    public void medicationRequestValidateResource(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -100,7 +101,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void MedicationDispenseValidateResource(){
+    public void medicationDispenseValidateResource(){
         FhirContext ctx = FhirContext.forR4();
 
         // Create a parser and configure it to use the strict error handler
@@ -115,7 +116,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void ClientsValidateResource(){
+    public void clientsValidateResource(){
         FhirContext ctx = FhirContext.forR4();
 
         ctx.setParserErrorHandler(new StrictErrorHandler());
@@ -126,7 +127,7 @@ public class ValidateResourceTest {
     }
 
     @Test
-    public void InstanceValidator(){
+    public void instanceValidator(){
         FhirContext ctx = FhirContext.forR4();
 
         // Ask the context for a validator

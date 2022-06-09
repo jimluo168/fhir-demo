@@ -28,3 +28,8 @@ repository:
   httpclient:
     basePackage: com.ha.fhir.**.repository
     server1: http://hapi-fhir.apjcorp.com/fhir
+
+dozer:
+  mappingFiles: # mappingFiles 为一个数组
+    - classpath:mapper/patient.xml  # UserDTO与UserEntity的映射文件
+
