@@ -2,9 +2,7 @@ package com.ha.fhir.modelmapper;
 
 import com.github.dozermapper.core.Mapper;
 import com.ha.fhir.FhirApplication;
-import com.ha.fhir.modelmapper.pojo.Apple;
-import com.ha.fhir.modelmapper.pojo.AppleDTO;
-import com.ha.fhir.modelmapper.pojo.patients;
+import com.ha.fhir.modelmapper.pojo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
@@ -24,7 +22,7 @@ public class ModelMapperTest {
     public static Apple apple;
     public static List<Apple> apples;
 
-    public static patients patients;
+    public static Patients patients;
 
     @Autowired
     private Mapper mapper;
@@ -46,13 +44,16 @@ public class ModelMapperTest {
         apples.add(apple2);
         apples.add(apple3);
 
-        patients =new patients();
+        patients =new Patients();
         patients.setId("123456");
         patients.setName("name");
         patients.setTexts("HKID");
         patients.setSystem("http://snomed.info/sct");
         patients.setGenders("male");
         patients.setCodes("260385009");
+        Identifier identifier=new Identifier();
+        identifier.setSystem("dadad");
+        patients.setIdentifier(identifier);
     }
 
     /**
@@ -107,5 +108,14 @@ public class ModelMapperTest {
     public void xmlCustomAppleMappingAppleDTO(){
         AppleDTO destObject = mapper.map(apple, AppleDTO.class,"apple");
         System.out.println(destObject);
+    }
+
+    /**
+     * xml配置映射关系
+     */
+    @Test
+    public void xmlCustomPatientsMappingPatientDTO(){
+        PatientDTO patientDTO = mapper.map(patients, PatientDTO.class);
+        System.out.println(patientDTO);
     }
 }

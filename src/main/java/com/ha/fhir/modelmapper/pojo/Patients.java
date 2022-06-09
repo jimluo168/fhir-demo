@@ -1,6 +1,6 @@
 package com.ha.fhir.modelmapper.pojo;
 
-public class patients {
+public class Patients {
     private String id;
 
     private String system;
@@ -12,6 +12,8 @@ public class patients {
     private String name;
 
     private String genders;
+
+    private Identifier identifier;
 
     public String getId() {
         return id;
@@ -61,15 +63,24 @@ public class patients {
         this.genders = genders;
     }
 
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(Identifier identifier) {
+        this.identifier = identifier;
+    }
+
     @Override
     public String toString() {
-        return "patientDTO{" +
-                "id=" + id +
+        return "patients{" +
+                "id='" + id + '\'' +
                 ", system='" + system + '\'' +
                 ", codes='" + codes + '\'' +
                 ", texts='" + texts + '\'' +
                 ", name='" + name + '\'' +
                 ", genders='" + genders + '\'' +
+                ", identifier=" + identifier +
                 '}';
     }
 }

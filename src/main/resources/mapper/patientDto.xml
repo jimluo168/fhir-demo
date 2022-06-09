@@ -1,0 +1,16 @@
+<mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://dozermapper.github.io/schema/bean-mapping"
+          xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping
+                             http://dozermapper.github.io/schema/bean-mapping.xsd">
+    <!--
+    可以使用map-id指定映射的标识，在程序中通过此标识来确定使用当前这个映射关系
+    -->
+    <mapping date-format="yyyy-MM-dd">
+        <class-a>com.ha.fhir.modelmapper.pojo.PatientDTO</class-a>
+        <class-b>com.ha.fhir.modelmapper.pojo.Patients</class-b>
+        <field>
+            <a>identifier.system</a>
+            <b>Identifier.system</b>
+        </field>
+    </mapping>
+</mappings>
